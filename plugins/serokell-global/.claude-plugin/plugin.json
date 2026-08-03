@@ -1,0 +1,19 @@
+{
+  "name": "serokell-global",
+  "description": "Skills covering the full Serokell project lifecycle: bootstrapping, CI, Haskell style, testing, changelogs, commits, PRs, code review, YouTrack issues, and the Nix binary cache",
+  "author": {
+    "name": "Serokell",
+    "email": "hi@serokell.io"
+  },
+  "homepage": "https://github.com/serokell/claude-plugins",
+  "repository": "https://github.com/serokell/claude-plugins",
+  "license": "MPL-2.0",
+  "keywords": [
+    "serokell",
+    "haskell",
+    "nix",
+    "skills",
+    "youtrack",
+    "ci"
+  ]
+}

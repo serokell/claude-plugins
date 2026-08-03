@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "serokell",
+  "description": "Claude Code skills for Serokell engineers",
+  "owner": {
+    "name": "Serokell",
+    "email": "hi@serokell.io"
+  },
+  "plugins": [
+    {
+      "name": "serokell-global",
+      "description": "Skills covering the full Serokell project lifecycle: bootstrapping, CI, Haskell style, testing, changelogs, commits, PRs, code review, YouTrack issues, and the Nix binary cache",
+      "author": {
+        "name": "Serokell",
+        "email": "hi@serokell.io"
+      },
+      "category": "development",
+      "source": "./plugins/serokell-global",
+      "homepage": "https://github.com/serokell/claude-plugins"
+    }
+  ]
+}
