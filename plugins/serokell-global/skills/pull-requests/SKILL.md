@@ -73,10 +73,12 @@ one, know what triggers it and what evidence backs ticking it:
 - **Stylistic guide (mandatory)** — never irrelevant. Confirm commit
   policy compliance, plus code style compliance if the repo has a
   style guide.
-- **Agent instructions (conditional)** — fires when the PR touches
-  `.claude/skills/` or `.github/copilot-instructions.md`. Keep the two
-  in sync: when one changes, verify the other still reflects the
-  changed content.
+- **Agent instructions (conditional)** — fires whenever a coding agent
+  opened the PR, no matter what it touches. Confirm you followed the
+  plugin's skills (`.claude/settings.json`), any local override at
+  `.claude/skills/<name>/SKILL.md`, and `.github/copilot-instructions.md`.
+  If this PR edits the skills or `copilot-instructions.md`, check that
+  they still agree with each other.
 
 ## Scope
 

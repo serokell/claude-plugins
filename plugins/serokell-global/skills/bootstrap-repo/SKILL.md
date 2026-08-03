@@ -19,10 +19,9 @@ requires:
 
 > **Skill bundle**: this skill delegates to `pull-requests`, `license-choice`,
 > `reuse-headers`, `readme`, `gitignore`, `haskell-style`, `setup-ci`,
-> `repository-settings`, and `changelog`. All of them must be available. In a
-> repo created from `metatemplates`, the full `.claude/skills/` directory is
-> already present. If only this skill was installed, clone or copy
-> `serokell/metatemplates` and load the siblings before proceeding.
+> `repository-settings`, and `changelog`. All of them must be available. Install
+> the `serokell-global` plugin from `serokell/claude-plugins` — it ships all
+> sibling skills at `plugins/serokell-global/skills/`.
 
 ## Fork or new repo?
 
@@ -60,7 +59,8 @@ requires:
    - `CONTRIBUTING.md`: keep and adapt it if it carries repo-specific
      contribution info; otherwise remove it.
    - Agent instruction files: review `.github/copilot-instructions.md`
-     and `.claude/skills/`; customise or delete what's irrelevant.
+     and `plugins/serokell-global/skills/` (or the equivalent skill
+     directory for your plugin); customise or delete what's irrelevant.
    - Strip meta-comments and placeholders (see *Gotchas*).
 4. **Bootstrap CI** → `setup-ci` skill. Must complete before step 5.
 5. **Apply repo settings** → `repository-settings` skill. Branch
