@@ -56,7 +56,7 @@ you must be able to justify that.
 - Public contracts
   - [ ] Any modifications of public contracts comply with the [Evolution
   of Public Contracts](https://app.notion.com/p/serokell/Evolution-of-Public-Contracts-2a3bf7971abe4806a24f63c84e7076c5) policy.
-  - [ ] I added an entry to the [changelog](../tree/main/CHANGES.md) if my changes are visible to the users
+  - [ ] I added an entry to the [changelog](../tree/main/CHANGELOG.md) if my changes are visible to the users
         and
   - [ ] provided a migration guide for breaking changes if possible
 
