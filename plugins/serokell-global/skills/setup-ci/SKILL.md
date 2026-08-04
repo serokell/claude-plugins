@@ -59,6 +59,18 @@ files it produces:
 
 Delete the one for the host you are not using.
 
+**Git tracking**: Nix flakes only evaluate git-tracked files. After
+running `nix flake init`, run `git add` on all new files before
+attempting any `nix build` or `nix flake check`. Otherwise `nix`
+silently ignores the new files — checks like `reuse-lint` that pass
+locally can still fail in CI or when run via `nix build`.
+
+**REUSE note**: The nix-templates-generated `flake.nix` files
+(`generic` and `haskell.nix/library`) are licensed under MPL-2.0.
+Even for proprietary projects that have deleted `LICENSES/`, you must
+keep `LICENSES/MPL-2.0.txt` for `reuse lint` to pass, since that
+file's header declares MPL-2.0.
+
 For Haskell projects, prefer the haskell.nix templates:
 
 ```
@@ -130,6 +142,20 @@ Nix-based CI gets caching automatically. Builds are keyed by hash of the
 full input, so identical builds across repos hit the cache. Changing the
 compiler version (even slightly) invalidates the cache for affected
 derivations.
+
+## Running Nix locally
+
+**Before running `nix build` or `nix flake check` locally, ask the
+user.** Without the Serokell binary cache, a full build can take
+anywhere from tens of minutes to several hours — building GHC from
+scratch easily exceeds two hours.
+
+The primary way to verify changes is to push to a branch and read the
+CI run logs. When in doubt, default to that.
+
+If the user wants to run Nix locally, first check whether the binary
+cache is configured (use the `nix-binary-cache` skill). If it is not,
+offer to set it up before proceeding.
 
 ## Branch protection (CI side)
 

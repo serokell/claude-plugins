@@ -31,6 +31,15 @@ Add the marketplace and enable the plugin in `~/.claude/settings.json`:
 
 For full setup instructions, see [docs/claude-setup.md](docs/claude-setup.md).
 
+## Usage
+
+Once the plugin is installed, Claude Code loads its skills automatically.
+Invoke a skill by name (e.g. `/pull-requests`) or let Claude apply one when the
+task matches its trigger description.
+
+Each skill is a standalone Markdown file in
+`plugins/serokell-global/skills/<skill-name>/SKILL.md`.
+
 ## Skills
 
 | Skill | Description |
@@ -50,6 +59,13 @@ For full setup instructions, see [docs/claude-setup.md](docs/claude-setup.md).
 | `youtrack-issues` | File and manage YouTrack issues |
 | `nix-binary-cache` | Set up the Serokell private Nix binary cache |
 | `repository-settings` | Apply standard GitHub repository settings |
+
+## About Serokell
+
+This project is maintained by [Serokell](https://serokell.io/).
+The names and logo for Serokell are trademark of Serokell OÜ.
+
+We love open source software! See [our other projects](https://serokell.io/projects?utm_source=github) or [hire us](https://serokell.io/contacts?utm_source=github) to design, develop, and grow your idea!
 
 ## Contributing
 

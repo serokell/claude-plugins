@@ -3,9 +3,25 @@
 # SPDX-License-Identifier: CC0-1.0
 name: bootstrap-repo
 description: Use when the user asks to create a new Serokell repository, bootstrap a fresh repo from `metatemplates`, fork an external repo into the Serokell org, initialize a new project, or sequence the full new-repo setup (create → customise → license → CI → settings). Triggers on phrases like "create a new Serokell repo", "bootstrap this repo", "set up a fresh repo", "fork this repo into serokell", "initialize new project", "new repo from metatemplates", "start a new project", "first commit on a new repo".
+requires:
+  - pull-requests
+  - license-choice
+  - reuse-headers
+  - readme
+  - gitignore
+  - haskell-style
+  - setup-ci
+  - repository-settings
+  - changelog
 ---
 
 # Bootstrap a new repository
+
+> **Skill bundle**: this skill delegates to `pull-requests`, `license-choice`,
+> `reuse-headers`, `readme`, `gitignore`, `haskell-style`, `setup-ci`,
+> `repository-settings`, and `changelog`. All of them must be available. Install
+> the `serokell-global` plugin from `serokell/claude-plugins` — it ships all
+> sibling skills at `plugins/serokell-global/skills/`.
 
 ## Fork or new repo?
 
@@ -34,6 +50,8 @@ description: Use when the user asks to create a new Serokell repository, bootstr
    - SPDX headers on every file → `reuse-headers` skill.
    - README rewritten to Standard Readme → `readme` skill.
    - `.gitignore` for the project's stack → `gitignore` skill.
+   - `.editorconfig`: keep and adapt it (or remove it if the team
+     doesn't use editor integration).
    - Haskell configs in `haskell/` (or delete the directory) →
      `haskell-style` skill.
    - PR/MR template: always keep it. Keep the directory for your host
@@ -41,7 +59,8 @@ description: Use when the user asks to create a new Serokell repository, bootstr
    - `CONTRIBUTING.md`: keep and adapt it if it carries repo-specific
      contribution info; otherwise remove it.
    - Agent instruction files: review `.github/copilot-instructions.md`
-     and `.claude/skills/`; customise or delete what's irrelevant.
+     and `plugins/serokell-global/skills/` (or the equivalent skill
+     directory for your plugin); customise or delete what's irrelevant.
    - Strip meta-comments and placeholders (see *Gotchas*).
 4. **Bootstrap CI** → `setup-ci` skill. Must complete before step 5.
 5. **Apply repo settings** → `repository-settings` skill. Branch
@@ -62,5 +81,9 @@ description: Use when the user asks to create a new Serokell repository, bootstr
   before merging.
 - Strip every `[//]: # (...)` meta-comment from inherited files —
   they exist to guide the human creator, not to ship. Verify
-  removal with `git grep '\[\/\/\]:'` (should return nothing in
-  committed files).
+  removal with:
+  ```
+  git grep '\[\/\/\]:' -- ':!.claude/' ':!.github/pull_request_template.md'
+  ```
+  (The exclusions avoid false positives from skill files and the PR
+  template, which contain these patterns intentionally.)

@@ -48,6 +48,32 @@ through a standard shell-like invocation and validate every subcommand
 and option as thoroughly as possible. This is the single most
 important kind of test for shipping a high-quality CLI product.
 
+**Nix sandbox caveat**: in a Nix build, the compiled executable is a
+separate derivation from the test suite, so it is not in PATH when
+tests run. Three options:
+
+- **Library API tests** (simpler): call the library functions directly
+  from the test suite. Covers logic but not the CLI surface.
+- **Integration derivation** (thorough): create a separate `pkgs.runCommand`
+  (or `pkgs.testers.runNixOSTest`) that takes both the executable and
+  the test script as explicit inputs, e.g.
+  `nativeBuildInputs = [ self.packages."${system}".foo ];`. Two gotchas
+  when wiring this up:
+  - Expose it as its own `packages.<name>` output rather than folding it
+    into a `checks = ci.build-all // ci.test-all // { ... }` union — merging
+    attrsets forces evaluating **all** operands to build the merged set, so
+    selecting your one new attribute still pulls in the full CI harness
+    (e.g. the whole Hackage index) before it can even start building.
+  - The build sandbox has no `/usr/bin/env`, so a test script with a
+    `#!/usr/bin/env bash` shebang fails to execute directly. Invoke it as
+    `bash ${./test-script.sh}` in the derivation instead of `${./test-script.sh}`.
+- **Outside the sandbox**: run the test binary directly during development,
+  where the executable is in PATH — e.g. `cabal test`/`stack test` for a
+  Haskell project, `go test` for Go, `cargo test` for Rust. Use whichever
+  invocation matches the project's language; don't run Haskell-specific
+  commands against a non-Haskell project. Suitable for local iteration;
+  does not replace a CI-tracked Nix check.
+
 ### Test coverage in CI
 
 - CI should produce a test coverage report.
