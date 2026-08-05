@@ -157,6 +157,20 @@ Beyond that, the rest of your CI should build all code, run tests, and
 optionally do something with the result (deploy, upload an artefact,
 publish docs).
 
+**`xrefcheck` and private-repo issue links**: `xrefcheck` already
+ignores `401`/`403` responses by default (`ignoreAuthFailures: true`),
+so most auth-walled links (Notion, YouTrack) need no extra config.
+GitHub is the exception: it returns `404`, not `403`, for issues/PRs
+in a private repo when unauthenticated, specifically so an
+unauthorized viewer can't even confirm they exist — `xrefcheck` can't
+tell that apart from a genuinely broken link, and there's no
+auth-token config to fix it. Add a project-wide `ignoreExternalRefsTo`
+regex for the repo's own issue-tracker URL pattern in `.xrefcheck.yaml`
+(e.g. `https://github\.com/OWNER/REPO/(issues|pull)/.*`) — the same
+mechanism already used for Notion/YouTrack links, and centralized
+rather than scattered `<!-- xrefcheck: ignore link -->` comments on
+every individual reference.
+
 ## Caching (nix)
 
 Nix-based CI gets caching automatically. Builds are keyed by hash of the
