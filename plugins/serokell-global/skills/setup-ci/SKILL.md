@@ -174,6 +174,13 @@ scratch easily exceeds two hours.
 The primary way to verify changes is to push to a branch and read the
 CI run logs. When in doubt, default to that.
 
+Use `gh pr checks <number> --watch` to follow a run live instead of a
+one-shot check or a sleep-then-check loop. Beyond convenience, a
+one-shot `gh pr checks` piped through another command (e.g. `| tail`)
+reports that command's exit code, not the checks' pass/fail state —
+easy to misread a failing run as green. This applies generally, not
+just to Nix CI.
+
 If the user wants to run Nix locally, first check whether the binary
 cache is configured (use the `nix-binary-cache` skill). If it is not,
 offer to set it up before proceeding.
