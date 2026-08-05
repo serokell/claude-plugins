@@ -100,6 +100,27 @@ hand. Those sections are for two cases: (1) assembling CI manually if
 you can't use a template, and (2) checking that a template-provided
 pipeline includes every check you want.
 
+## Gotchas
+
+- **Match the CI workflow to the `checks` shape.** The generated
+  `check.yml` expects flat `checks.build-all` / `checks.test`. If
+  `checks` is built around `serokell-nix.lib.haskell.makeCI` instead
+  (`checks = ci.build-all // ci.test-all // {...}`), that flattens
+  per-package sub-attributes into `checks` — there's no literal
+  `checks.build-all` key. `makeCI` needs the matrix-based workflow
+  instead: `inherit (ci) build-matrix;` in the flake, a
+  `check-prefixes` job to evaluate it, and a `build-and-test` job
+  with `strategy: matrix: ${{fromJson(...)}}` against
+  `checks.x86_64-linux.${{ matrix.prefix }}:build-all`.
+- **Set `tested-with:` or `makeCI`'s build matrix goes empty.**
+  Without `ghcVersions` or a `tested-with:` stanza, the matrix
+  evaluates to `{"include":[]}`. GitHub then reports that job's
+  `needs.<job>.result` as `failure`, not `skipped`, while every other
+  check is green.
+- **`nix run github:X` needs an explicit attribute without a
+  `default`.** Use `nix run github:owner/repo#package-name -- args`
+  unless the flake exposes `packages.<system>.default`.
+
 ## Haskell-specific CI
 
 For Haskell projects, in addition to the standard build/test jobs:
