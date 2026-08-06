@@ -59,6 +59,14 @@ by the PR author on their own PR. If you are the author and need to
 flag issues found during self-review, use `COMMENT` instead — all
 inline comments and the summary are preserved.
 
+**Agent quirk**: if you (a coding agent) authored the PR yourself,
+self-review must be delegated to a separate agent instance with no
+context from the session that wrote the changes — not performed
+inline by the authoring session. A session that already knows why
+every choice was made tends to rubber-stamp its own work; a fresh
+agent reviewing only the diff and the relevant skills has no such
+bias and will actually catch things.
+
 ## Comment hygiene
 
 - When the issue raised by **your** comment is addressed (e.g.

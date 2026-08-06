@@ -100,6 +100,27 @@ hand. Those sections are for two cases: (1) assembling CI manually if
 you can't use a template, and (2) checking that a template-provided
 pipeline includes every check you want.
 
+## Gotchas
+
+- **Match the CI workflow to the `checks` shape.** The generated
+  `check.yml` expects flat `checks.build-all` / `checks.test`. If
+  `checks` is built around `serokell-nix.lib.haskell.makeCI` instead
+  (`checks = ci.build-all // ci.test-all // {...}`), that flattens
+  per-package sub-attributes into `checks` — there's no literal
+  `checks.build-all` key. `makeCI` needs the matrix-based workflow
+  instead: `inherit (ci) build-matrix;` in the flake, a
+  `check-prefixes` job to evaluate it, and a `build-and-test` job
+  with `strategy: matrix: ${{fromJson(...)}}` against
+  `checks.x86_64-linux.${{ matrix.prefix }}:build-all`.
+- **Set `tested-with:` or `makeCI`'s build matrix goes empty.**
+  Without `ghcVersions` or a `tested-with:` stanza, the matrix
+  evaluates to `{"include":[]}`. GitHub then reports that job's
+  `needs.<job>.result` as `failure`, not `skipped`, while every other
+  check is green.
+- **`nix run github:X` needs an explicit attribute without a
+  `default`.** Use `nix run github:owner/repo#package-name -- args`
+  unless the flake exposes `packages.<system>.default`.
+
 ## Haskell-specific CI
 
 For Haskell projects, in addition to the standard build/test jobs:
@@ -136,6 +157,20 @@ Beyond that, the rest of your CI should build all code, run tests, and
 optionally do something with the result (deploy, upload an artefact,
 publish docs).
 
+**`xrefcheck` and private-repo issue links**: `xrefcheck` already
+ignores `401`/`403` responses by default (`ignoreAuthFailures: true`),
+so most auth-walled links (Notion, YouTrack) need no extra config.
+GitHub is the exception: it returns `404`, not `403`, for issues/PRs
+in a private repo when unauthenticated, specifically so an
+unauthorized viewer can't even confirm they exist — `xrefcheck` can't
+tell that apart from a genuinely broken link, and there's no
+auth-token config to fix it. Add a project-wide `ignoreExternalRefsTo`
+regex for the repo's own issue-tracker URL pattern in `.xrefcheck.yaml`
+(e.g. `https://github\.com/OWNER/REPO/(issues|pull)/.*`) — the same
+mechanism already used for Notion/YouTrack links, and centralized
+rather than scattered `<!-- xrefcheck: ignore link -->` comments on
+every individual reference.
+
 ## Caching (nix)
 
 Nix-based CI gets caching automatically. Builds are keyed by hash of the
@@ -152,6 +187,13 @@ scratch easily exceeds two hours.
 
 The primary way to verify changes is to push to a branch and read the
 CI run logs. When in doubt, default to that.
+
+Use `gh pr checks <number> --watch` to follow a run live instead of a
+one-shot check or a sleep-then-check loop. Beyond convenience, a
+one-shot `gh pr checks` piped through another command (e.g. `| tail`)
+reports that command's exit code, not the checks' pass/fail state —
+easy to misread a failing run as green. This applies generally, not
+just to Nix CI.
 
 If the user wants to run Nix locally, first check whether the binary
 cache is configured (use the `nix-binary-cache` skill). If it is not,

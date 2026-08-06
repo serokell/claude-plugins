@@ -49,6 +49,17 @@ This repo (and any repo created from it) provides Haskell defaults under
   belong in a developer's local config, not in the project's build
   settings.
 
+## Optional conventions (not in the internal style guide)
+
+Some Serokell projects follow these, but they're not mandated. Worth
+considering, not worth enforcing:
+
+- A custom prelude, most commonly [Universum](https://hackage.haskell.org/package/universum).
+- For a CLI entry point, wrapping `main` in `withUtf8` from
+  [`with-utf8`](https://hackage.haskell.org/package/with-utf8)
+  (`import Main.Utf8 (withUtf8)`; `main = withUtf8 $ do ...`), so I/O
+  uses UTF-8 regardless of the locale it runs under.
+
 ## Style rules (digest from `serokell/style`)
 
 ### Layout

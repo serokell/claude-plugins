@@ -100,6 +100,10 @@ blocked processes using the `kill` syscall.
 - For ordinary new commits, use plain `git push`.
 - Force-push only after rewriting history (e.g. after `git rebase`).
   Use `--force-with-lease`, never `-f`.
+- After `git mv`, editing the moved file's contents does not re-stage
+  it. `git add` the path again before committing, or the commit
+  captures the bare rename and the real edit shows up as an unstaged
+  diff afterward.
 
 ## During PR review
 

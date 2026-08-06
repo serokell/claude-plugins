@@ -50,11 +50,23 @@ important kind of test for shipping a high-quality CLI product.
 
 **Nix sandbox caveat**: in a Nix build, the compiled executable is a
 separate derivation from the test suite, so it is not in PATH when
-tests run. Three options:
+tests run. Options, best first:
 
-- **Library API tests** (simpler): call the library functions directly
-  from the test suite. Covers logic but not the CLI surface.
-- **Integration derivation** (thorough): create a separate `pkgs.runCommand`
+- **`build-tool-depends` (preferred for cabal/hpack projects)**: declare
+  the CLI executable as a build tool of the test suite —
+  `build-tool-depends: mypackage:myexe` in the `.cabal` file, or
+  `build-tools: mypackage:myexe` in `package.yaml` (the same mechanism
+  already used for `tasty-discover:tasty-discover`). Cabal then puts
+  that executable on PATH before the test suite builds and runs, for
+  *both* local `stack test`/`cabal test` and the Nix sandbox — no
+  separate derivation, no `nativeBuildInputs` wiring. Write the test
+  itself as an ordinary test-suite component (e.g. spawning the binary
+  via `System.Process`), not a shell script.
+- **Library API tests** (simpler, but doesn't exercise the CLI surface
+  at all): call the library functions directly from the test suite.
+  Covers logic but not the CLI surface.
+- **Integration derivation** (when `build-tool-depends` isn't
+  available, e.g. non-cabal ecosystems): create a separate `pkgs.runCommand`
   (or `pkgs.testers.runNixOSTest`) that takes both the executable and
   the test script as explicit inputs, e.g.
   `nativeBuildInputs = [ self.packages."${system}".foo ];`. Two gotchas

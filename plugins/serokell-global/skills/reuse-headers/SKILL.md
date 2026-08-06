@@ -119,7 +119,14 @@ comments: register them in `REUSE.toml` (in the repo root) via an
 `.reuse/dep5` format is deprecated — run `reuse convert-dep5` to
 migrate an existing one.)
 
+Generated build files (`*.cabal`, `stack.yaml.lock`, `flake.lock`, etc.)
+fall in this category too. They only appear after running the relevant
+build tool, so a `reuse lint` that passed before they existed doesn't
+mean they're covered — annotate them in `REUSE.toml` when they show up.
+
 ## Verifying compliance
 
-Run `reuse lint`. The check baseline in this repo expects it to pass.
+Run `reuse lint` again after any command that adds new files (`hpack`,
+`stack build`, `nix build`, `cabal build`), not just once. The check
+baseline in this repo expects it to pass.
 
