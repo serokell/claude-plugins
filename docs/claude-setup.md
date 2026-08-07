@@ -18,7 +18,13 @@ Claude Code can read and write Notion pages when the Notion integration is enabl
 
 In a Claude Code session, type `/mcp`. From the list, choose **Notion**. A browser window opens. Authorize access and return to the terminal. Done.
 
-## 2. Connect YouTrack
+## 2. Connect Google Drive
+
+Claude Code can read Google Drive files when the Google Drive integration is enabled.
+
+In a Claude Code session, type `/mcp`. From the list, choose **Google Drive**. A browser window opens confirming what Claude should be able to access — select all, then authorize and return to the terminal. Done.
+
+## 3. Connect YouTrack
 
 Claude uses a permanent token to create and update issues in `issues.serokell.io`.
 
@@ -35,11 +41,20 @@ Claude Code loads `~/.claude/.env` on startup, so the token is available in ever
 
 **Never paste a secret into a Claude prompt.** If a secret appears in the agent context, treat it as compromised and rotate it immediately. Store credentials in files, not in messages.
 
-## 3. Install the Serokell plugin
+## 4. Install the Serokell plugin
 
 The Serokell plugin bundle ships skills for everything from bootstrapping a repo to reviewing a PR. It is hosted at `serokell/claude-plugins` on GitHub.
 
-Add the marketplace and enable the global plugin in `~/.claude/settings.json`:
+In a Claude Code session, add the marketplace and install the global plugin:
+
+```
+/plugin marketplace add serokell/claude-plugins
+/plugin install serokell-global@serokell
+```
+
+When prompted for a scope, choose **User** — this makes the plugin available in every project, not just the one you're currently in.
+
+Equivalently, add the marketplace and enable the plugin directly in `~/.claude/settings.json`:
 
 ```json
 {
@@ -57,7 +72,7 @@ This gives you the workflow skills (`committing-work`, `youtrack-issues`, `pull-
 
 For projects that use metatemplates, the full skill set is already wired up via the project-level `.claude/settings.json`.
 
-## 4. Configure commit signing
+## 5. Configure commit signing
 
 Claude Code commits on your behalf. All commits at Serokell must be GPG-signed.
 
