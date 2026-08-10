@@ -54,7 +54,9 @@ In a Claude Code session, add the marketplace and install the global plugin:
 
 When prompted for a scope, choose **User** — this makes the plugin available in every project, not just the one you're currently in.
 
-Equivalently, add the marketplace and enable the plugin directly in `~/.claude/settings.json`:
+Third-party marketplaces have auto-update disabled by default, and no command turns it on — the toggle lives in the plugin manager. Run `/plugin`, open the **Marketplaces** tab and select **serokell**: the entry reads **Enable auto-update**, or **Disable auto-update** if it is already on. The entry is absent entirely when updates are switched off globally on your machine, for instance by `DISABLE_AUTOUPDATER`; `claude doctor` reports whether auto-updates are enabled and, if not, what disabled them. Skip this step and the plugin stays on the version you first installed; picking up new skills then takes `/plugin marketplace update serokell` followed by `/plugin update serokell-global@serokell`, run by hand.
+
+The same setup can be declared in `~/.claude/settings.json` instead. This is not identical to the commands above — it also sets `autoUpdate`, and it lives in a file you can version-control and share between machines:
 
 ```json
 {
