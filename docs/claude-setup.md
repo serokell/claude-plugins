@@ -82,9 +82,7 @@ Make sure signing is on:
 git config --global commit.gpgsign true
 ```
 
-If GPG prompts for a passphrase via a Curses dialog (which does not work in a terminal-only session), switch to a graphical pinentry. For example on KDE:
-
-```bash
-echo "pinentry-program /usr/bin/pinentry-qt" >> ~/.gnupg/gpg-agent.conf
-gpg-connect-agent reloadagent /bye
-```
+If GPG prompts for a passphrase via a Curses dialog, or SSH does via stdin,
+neither works from a terminal-only session — Claude Code can't answer
+either kind of prompt. See [gpg-pinentry.md](gpg-pinentry.md) and
+[ssh-passphrase.md](ssh-passphrase.md) for the fixes, both optional.

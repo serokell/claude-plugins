@@ -199,6 +199,26 @@ If the user wants to run Nix locally, first check whether the binary
 cache is configured (use the `nix-binary-cache` skill). If it is not,
 offer to set it up before proceeding.
 
+**A hard Nix crash locally that doesn't reproduce on CI can be the
+local Nix binary, not the flake.** An old Nix (pre-2.26, e.g. 2.25.3)
+hard-crashes with `Assertion 'narHash' failed` in `fetchTree.cc`
+whenever it evaluates *any* flake input node whose lock entry lacks a
+`narHash` — unrelated to whatever you're actually building; it
+reproduces on a pre-existing, untouched check on a clean tree just as
+readily as on new code. This is a real upstream bug, fixed in
+[NixOS/nix#11933](https://github.com/NixOS/nix/pull/11933); CI runners
+on a current Nix don't hit it, which is what makes it look
+build-specific when it's actually machine-specific. Don't debug the
+flake for this — check `nix --version` first. Workaround without
+touching the system install: `nix build nixpkgs#nix` fetches a newer
+Nix locally (no sudo) to build with instead; `nix upgrade-nix` on an
+old system install can get stuck in a sudo dance without resolving
+anything. The real fix is upgrading the system's Nix — the exact
+steps depend on how it was installed (multi-user daemon, single-user,
+Determinate, distro package), so follow
+[nix.dev's upgrading guide](https://nix.dev/manual/nix/latest/installation/upgrading)
+for the right one.
+
 ## Branch protection (CI side)
 
 After CI exists, configure the protected branches (usually `master`)

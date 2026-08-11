@@ -25,7 +25,13 @@ Required (in spec order):
 - **Install** — how to install / build.
 - **Usage** — how to use it; CLI examples; the most common operations.
 - **Contributing** — link to `CONTRIBUTING.md` if it exists, or
-  inline guidance.
+  inline guidance. If describing branch naming, commit format, or the
+  PR process, pull it from the `committing-work` / `pull-requests`
+  skills (or `.github/copilot-instructions.md` if the repo has one) —
+  don't write it from general knowledge of a workflow model. Repo- and
+  company-specific conventions can differ from what's generically true
+  of e.g. OneFlow, and restating from memory risks inventing a rule
+  that doesn't match what the repo actually does.
 - **License** — SPDX identifier and link to `LICENSE`.
 
 Optional (include when applicable, in spec order between

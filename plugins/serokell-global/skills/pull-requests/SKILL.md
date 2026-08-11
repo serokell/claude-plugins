@@ -34,6 +34,11 @@ Must not be empty.
   issues, paste the full URL
   (`https://issues.serokell.io/issue/<PROJECT>-<N>`) prefixed with
   `Resolves`.
+- Move the linked issue's state forward now, not after merge:
+  YouTrack → `Review` (see the `youtrack-issues` skill). GitHub /
+  GitLab issues → if the project tracks state via labels, apply the
+  corresponding one; most don't, so don't invent one that isn't
+  already in use.
 
 ## Checkboxes
 
@@ -126,4 +131,7 @@ one, know what triggers it and what evidence backs ticking it:
   PR is trivial (e.g. a one-line fix) you can merge without asking;
   otherwise ping the author. On GitLab, the author's self-approval
   counts as agreement to merge.
+- After merging, move the linked issue to `Done`: YouTrack (see the
+  `youtrack-issues` skill) or close the GitHub / GitLab issue if
+  `Fixed #N`/`Resolves #N` didn't already auto-close it.
 
