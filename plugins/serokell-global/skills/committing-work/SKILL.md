@@ -12,6 +12,19 @@ stage changes, or write a commit message.
 
 ## Branch naming
 
+Before naming the branch, mark yourself as working on the issue:
+
+- YouTrack: move it to `In Progress` (see the `youtrack-issues`
+  skill for the full lifecycle and who else to set).
+- GitHub / GitLab issues: set yourself as the assignee. Some projects
+  also track state via labels (e.g. `status: in progress`) — check
+  the project's existing labels and apply one if it uses this
+  convention; most don't, so don't invent a label that isn't already
+  there.
+
+Do it now, at the start — it's the easiest step to forget once you're
+into the actual work.
+
 Issue branches: `<username>/<issue_id>-<brief_description>`
 
 - `<username>` is your GitHub username.
