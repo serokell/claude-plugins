@@ -56,6 +56,8 @@ When prompted for a scope, choose **User** — this makes the plugin available i
 
 Third-party marketplaces have auto-update disabled by default, and no command turns it on — the toggle lives in the plugin manager. Run `/plugin`, open the **Marketplaces** tab and select **serokell**: the entry reads **Enable auto-update**, or **Disable auto-update** if it is already on. The entry is absent entirely when updates are switched off globally on your machine, for instance by `DISABLE_AUTOUPDATER`; `claude doctor` reports whether auto-updates are enabled and, if not, what disabled them. Skip this step and the plugin stays on the version you first installed; picking up new skills then takes `/plugin marketplace update serokell` followed by `/plugin update serokell-global@serokell`, run by hand.
 
+If the entry is missing and `claude doctor` reports auto-updates disabled, some install methods set `DISABLE_UPDATES=1` themselves, on the assumption that your system package manager handles updates instead — confirmed on Arch Linux's AUR `claude-code` package, and plausibly true of other distro packages too. Launch Claude Code with `FORCE_AUTOUPDATE_PLUGINS=1` to override this and get the toggle back.
+
 The same setup can be declared in `~/.claude/settings.json` instead. This is not identical to the commands above — it also sets `autoUpdate`, and it lives in a file you can version-control and share between machines:
 
 ```json
