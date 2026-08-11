@@ -59,8 +59,10 @@ requires:
    - `CONTRIBUTING.md`: keep and adapt it if it carries repo-specific
      contribution info; otherwise remove it.
    - Agent instruction files: review `.github/copilot-instructions.md`
-     and `plugins/serokell-global/skills/` (or the equivalent skill
-     directory for your plugin); customise or delete what's irrelevant.
+     for repo-specific tweaks. Skills themselves aren't copied into
+     the new repo — `.claude/settings.json` already points at the
+     `serokell-global` plugin; only touch it if this repo needs a
+     different plugin or a local override under `.claude/skills/`.
    - Strip meta-comments and placeholders (see *Gotchas*).
 4. **Bootstrap CI** → `setup-ci` skill. Must complete before step 5.
 5. **Apply repo settings** → `repository-settings` skill. Branch
