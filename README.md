@@ -25,7 +25,9 @@ Add the marketplace and enable the plugin in `~/.claude/settings.json`:
       "autoUpdate": true
     }
   },
-  "enabledPlugins": ["serokell-global@serokell"]
+  "enabledPlugins": {
+    "serokell-global@serokell": true
+  }
 }
 ```
 

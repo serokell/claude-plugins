@@ -68,7 +68,9 @@ The same setup can be declared in `~/.claude/settings.json` instead. This is not
       "autoUpdate": true
     }
   },
-  "enabledPlugins": ["serokell-global@serokell"]
+  "enabledPlugins": {
+    "serokell-global@serokell": true
+  }
 }
 ```
 
