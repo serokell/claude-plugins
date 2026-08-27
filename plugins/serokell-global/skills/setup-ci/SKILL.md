@@ -171,6 +171,14 @@ mechanism already used for Notion/YouTrack links, and centralized
 rather than scattered `<!-- xrefcheck: ignore link -->` comments on
 every individual reference.
 
+## Optional: Danger checks for PR/MR review
+
+See [danger-checks.md](danger-checks.md) if this repo wants
+commit-style/MR-convention checks, or simple mechanical code-style
+checks via a custom rule ([serokell_danger](https://github.com/serokell/danger)).
+It needs a Ruby/Bundler toolchain, so it's not part of the
+common-checks list above.
+
 ## Caching (nix)
 
 Nix-based CI gets caching automatically. Builds are keyed by hash of the
@@ -237,4 +245,3 @@ For the full set of Serokell-default branch-protection,
 merge-mode, and repo-level flags (signed commits required,
 auto-merge, delete-head-branches, disable rebase merging, etc.),
 see the `repository-settings` skill.
-
