@@ -171,6 +171,20 @@ mechanism already used for Notion/YouTrack links, and centralized
 rather than scattered `<!-- xrefcheck: ignore link -->` comments on
 every individual reference.
 
+## Optional: Danger checks for PR/MR review
+
+[serokell_danger](https://github.com/serokell/danger) is a
+GitHub/GitLab-agnostic gem of [Danger](https://danger.systems/ruby/)
+checks: commit style, license headers, MR/PR conventions,
+merge-commit hygiene, trailing whitespace. It overlaps with some of
+the common checks above, but it needs a Ruby/Bundler toolchain, so
+treat it as an optional addition, not part of the common-checks list.
+If this repo wants commit-style or MR checks, see
+[serokell/danger's README](https://github.com/serokell/danger#readme)
+for the `Gemfile`/`Dangerfile` snippet, and
+[metatemplates' docs/danger.md](https://github.com/serokell/metatemplates/blob/master/docs/danger.md)
+for how to wire it into CI as its own job.
+
 ## Caching (nix)
 
 Nix-based CI gets caching automatically. Builds are keyed by hash of the
@@ -237,4 +251,3 @@ For the full set of Serokell-default branch-protection,
 merge-mode, and repo-level flags (signed commits required,
 auto-merge, delete-head-branches, disable rebase merging, etc.),
 see the `repository-settings` skill.
-
