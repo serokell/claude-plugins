@@ -23,3 +23,9 @@ path = "**/*.json"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Serokell <https://serokell.io>"
 SPDX-License-Identifier = "MPL-2.0"
+
+[[annotations]]
+path = "Gemfile.lock"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Serokell <https://serokell.io>"
+SPDX-License-Identifier = "MPL-2.0"
