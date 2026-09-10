@@ -38,7 +38,7 @@ and never read a file that might contain one. If a secret ever shows
 up in the conversation or in a file you read, treat it as compromised
 and tell the user to rotate it right away.
 
-If the secret isn't set up yet, add the job anyway, but comment out
-the run step with a note on how to re-enable it, e.g. "Enable Danger
-checks once `DANGER_GITHUB_API_TOKEN` is set, then uncomment this
-step."
+If the secret isn't set up yet, add the job anyway, but disable it
+with `if: ${{ false }}` on the job rather than commenting it out.
+Re-enabling later is then a one-line edit instead of un-commenting a
+whole block.
