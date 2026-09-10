@@ -174,10 +174,10 @@ every individual reference.
 ## Optional: Danger checks for PR/MR review
 
 See [danger-checks.md](danger-checks.md) if this repo wants
-commit-style or MR-convention checks via
-[serokell_danger](https://github.com/serokell/danger). It needs a
-Ruby/Bundler toolchain, so it's not part of the common-checks list
-above.
+commit-style/MR-convention checks, or simple mechanical code-style
+checks via a custom rule ([serokell_danger](https://github.com/serokell/danger)).
+It needs a Ruby/Bundler toolchain, so it's not part of the
+common-checks list above.
 
 ## Caching (nix)
 

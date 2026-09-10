@@ -38,7 +38,6 @@ and never read a file that might contain one. If a secret ever shows
 up in the conversation or in a file you read, treat it as compromised
 and tell the user to rotate it right away.
 
-If the secret isn't set up yet, add the job anyway, but disable it
-with `if: ${{ false }}` on the job rather than commenting it out.
-Re-enabling later is then a one-line edit instead of un-commenting a
-whole block.
+If the secret isn't set up yet, disable the job with `if: ${{ false }}`
+instead of commenting it out. Re-enabling later is just a one-line
+edit.
