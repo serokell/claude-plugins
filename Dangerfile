@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Serokell <https://serokell.io/>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+require "serokell_danger"
+
+check_commits_style
+check_premerge_commits
+check_merge_request
+check_merge_commits
+check_license_headers
+check_trailing_whitespace
