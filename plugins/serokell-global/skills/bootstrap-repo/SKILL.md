@@ -44,8 +44,14 @@ requires:
    `master` — even initialisation goes through review.
    → `pull-requests` skill.
 3. **Customise inherited files** (any order — these are independent):
-   - Fill `PROJECT.md` with this repo's issue tracker, YouTrack project
-     key, and team lead — several skills read it.
+   - Fill `PROJECT.md` with this repo's issue tracker and team lead —
+     several skills read it.
+     - Customer-facing projects use YouTrack as primary issue
+       tracker, YT project key should be recorded.
+     - Small utility repositories use single YouTrack umbrella ticket
+       for time tracking, dedicated to project maintenance; GitHub is
+       used as issue tracker, and "team lead" term de-facto indicates
+       the project owner.
    - License + `LICENSES/` + root `LICENSE` → `license-choice` skill.
    - SPDX headers on every file → `reuse-headers` skill.
    - README rewritten to Standard Readme → `readme` skill.
