@@ -95,12 +95,14 @@ one, know what triggers it and what evidence backs ticking it:
 
 ## Reviewers
 
+Once PR is confirmed to be ready (user may want to verify):
+
 - Request review from the project's expected number of reviewers
   (project-dependent, often 2). If unsure, check `CODEOWNERS` and
   recent merged PRs, or ask the user. Look for people who touched this
   code before or are likely interested.
 - Codeowners may be auto-requested; check the final reviewer list after
-  opening the PR.
+  the PR was opened.
 
 ## During review
 
@@ -134,4 +136,3 @@ one, know what triggers it and what evidence backs ticking it:
 - After merging, move the linked issue to `Done`: YouTrack (see the
   `youtrack-issues` skill) or close the GitHub / GitLab issue if
   `Fixed #N`/`Resolves #N` didn't already auto-close it.
-
