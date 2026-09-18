@@ -61,6 +61,7 @@ Each skill is a standalone Markdown file in
 | `youtrack-issues` | File and manage YouTrack issues |
 | `nix-binary-cache` | Set up the Serokell private Nix binary cache |
 | `repository-settings` | Apply standard GitHub repository settings |
+| `dummy-skill` | Placeholder skill for verifying skill discovery |
 
 ## About Serokell
 
