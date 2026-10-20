@@ -30,7 +30,11 @@ Regardless of format:
   "Refactored Z". Prefer too much detail over too little — a reader
   six months from now should be able to act on the entry without
   re-reading the PR.
-- **PR or issue reference** alongside each bullet (e.g. `(#123)`).
+- **PR or issue reference** alongside each bullet (e.g. `(#123)`):
+  the PR itself, or the issue the change resolves. Never cite a
+  project-wide ticket, such as a YouTrack umbrella ticket used for time
+  tracking — it says nothing about the change. With no dedicated issue,
+  the PR number alone is enough.
 - **Breaking changes** clearly marked (e.g. a leading `BREAKING:` tag
   or a separate "Breaking changes" subsection), with **migration
   guidance** — inline if short, or a link to a longer migration doc.

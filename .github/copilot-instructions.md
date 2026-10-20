@@ -23,6 +23,8 @@
   and dashes.
 - Commit subject: `[ISSUE-ID] Brief description`. Uppercase first letter,
   imperative mood, target ≤50 chars (hard limit 72), no trailing period.
+  With no dedicated issue, use `[Chore]` — never a project-wide or
+  time-tracking ticket.
 - Commit body: blank line after subject, then `Problem: …` paragraph,
   then `Solution: …` paragraph. Body is mandatory.
 - All commits must be signed.

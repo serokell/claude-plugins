@@ -16,6 +16,8 @@ Scheme: `[ISSUE-ID] Brief description`.
 
 - Omit `[ISSUE-ID]` if the repository is public and the issue is in a
   private tracker (e.g. YouTrack).
+- With no dedicated issue, use `[Chore]`, as for commits (see the
+  `committing-work` skill).
 - Brief description: short but understandable on its own.
 
 ## Description
@@ -33,7 +35,8 @@ Must not be empty.
   `Fixed #N` / `Resolves #N` to auto-close them on merge. For YouTrack
   issues, paste the full URL
   (`https://issues.serokell.io/issue/<PROJECT>-<N>`) prefixed with
-  `Resolves`.
+  `Resolves`. With no dedicated issue, write `None` — don't link a
+  project-wide or time-tracking ticket.
 - Move the linked issue's state forward now, not after merge:
   YouTrack → `Review` (see the `youtrack-issues` skill). GitHub /
   GitLab issues → if the project tracks state via labels, apply the
