@@ -67,6 +67,8 @@ Subject line:
 - Prefix with issue IDs in square brackets: `[#453]`, `[GHC-8]`. Omit if
   the repository is public and the issue is in a private tracker (e.g.
   YouTrack).
+- With no dedicated issue (e.g. small maintenance), prefix with
+  `[Chore]`. Don't substitute a project-wide or time-tracking ticket.
 - Start with an uppercase letter.
 - Use the imperative mood ("Switch from X to Y", not "Switched" or "Switches").
 - Target ≤50 characters; hard limit 72.
@@ -133,4 +135,3 @@ git commit --fixup=<sha-of-the-commit-being-fixed>
 
 `git rebase -i --autosquash <target>` then auto-orders and marks
 these `fixup!` commits to be squashed when the history is cleaned up.
-

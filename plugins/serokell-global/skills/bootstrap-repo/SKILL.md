@@ -48,10 +48,13 @@ requires:
      several skills read it.
      - Customer-facing projects use YouTrack as primary issue
        tracker, YT project key should be recorded.
-     - Small utility repositories use single YouTrack umbrella ticket
-       for time tracking, dedicated to project maintenance; GitHub is
-       used as issue tracker, and "team lead" term de-facto indicates
-       the project owner.
+     - Small utility repositories use GitHub as issue tracker, and
+       "team lead" term de-facto indicates the project owner. Time is
+       logged against a single YouTrack umbrella ticket dedicated to
+       project maintenance; record it on a separate `Time tracking:`
+       line, not as the issue tracker. It exists only for time
+       logging — never cite it in branch names, commits, PRs, or
+       changelog entries.
    - License + `LICENSES/` + root `LICENSE` → `license-choice` skill.
    - SPDX headers on every file → `reuse-headers` skill.
    - README rewritten to Standard Readme → `readme` skill.
